@@ -1,8 +1,8 @@
 
-1- Turning off the lights when no data is received from the sensor.
-2- Continuously counting the number of people in the house.
-3- Turning the air conditioning on/off based on data from the temperature sensor.
-4- Turning off the heating system when the window is opened.
-5- Switching to security mode when no one is at home.
-6- Automatically turning lights on and off at specified times.
-7- Controlling the blinds based on sunlight levels.
+1- Turning off the lights when no data is received from the sensor. (combinational)
+2- Continuously counting the number of people in the house. (sequential)
+3- Turning the air conditioning on/off based on data from the temperature sensor.(combinational)
+4- Turning off the heating system when the window is opened. (combinational)
+5- Switching to security mode when no one is at home. (combinational)
+6- Automatically turning lights on and off at specified times. (sequential)
+7- Controlling the blinds based on sunlight levels. (combinational)
