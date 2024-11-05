@@ -22,9 +22,17 @@
 
 module home_automation
     (
+        // Register Konrol (Kumanda ile mesela)
+        input command_valid_i,
+        input [`COMMAND_CONTROL_TYPE_WIDTH-1:0] command_type_i,
+        input [`COMMAND_CONTROL_DATA_WIDTH-1:0] command_data_i,
+        
+        // Sensor Verileri
         input[`TEMPERATURE_SENSOR_DATA_WIDTH-1:0] temparature_i,
         input [`HOME_WINDOW_COUNT-1:0] WINDOW_STATUS_i,
         input [`HOME_DOOR_COUNT-1:0] DOOR_STATUS_i,
+        
+        // Kontrol Çıkışları
         output AC_heat_o, AC_cool_o,
         output lock_doors_o, lock_windows_o
     );
@@ -34,6 +42,7 @@ module home_automation
     reg [1:0] ac_working_mode_r;
     reg [`PERSON_COUNTER_DATA_WIDTH-1:0] person_count_r;
     reg security_control_valid_r;
+    //=======================================
     
     wire TEMPCONTROLLER_ac_heat_w;
     wire TEMPCONTROLLER_ac_cool_w;

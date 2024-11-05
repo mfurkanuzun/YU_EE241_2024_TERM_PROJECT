@@ -3,6 +3,8 @@
 // topmodule
 `define PERSON_COUNTER_DATA_WIDTH                   16
 
+`define COMMAND_CONTROL_TYPE_WIDTH                  3
+`define COMMAND_CONTROL_DATA_WIDTH                  8
 
 `define HOME_WINDOW_COUNT                           8
 `define HOME_DOOR_COUNT                             4
