@@ -23,10 +23,17 @@
 module home_automation
     (
         input[`TEMPERATURE_SENSOR_DATA_WIDTH-1:0] temparature_i,
-        output AC_heat_o, AC_cool_o
+        input [`HOME_WINDOW_COUNT-1:0] WINDOW_STATUS_i,
+        input [`HOME_DOOR_COUNT-1:0] DOOR_STATUS_i,
+        output AC_heat_o, AC_cool_o,
+        output lock_doors_o, lock_windows_o
     );
     
+    // CONTROL REGISTER LIST
+    reg ECO_mod_valid_r;
     reg [1:0] ac_working_mode_r;
+    reg [`PERSON_COUNTER_DATA_WIDTH-1:0] person_count_r;
+    reg security_control_valid_r;
     
     wire TEMPCONTROLLER_ac_heat_w;
     wire TEMPCONTROLLER_ac_cool_w;
@@ -40,7 +47,7 @@ module home_automation
     assign AC_heat_o = ~NOWASTE_ac_energy_w & TEMPCONTROLLER_ac_heat_w;
     assign AC_cool_o = ~NOWASTE_ac_energy_w & TEMPCONTROLLER_ac_cool_w;
     
-    // AC temp controller
+    // AC temp Controller
     ac_temp_controller AC_TEMP_CONTROLLER
     (
         .ac_working_mode_i(ac_working_mode_r),
@@ -48,6 +55,24 @@ module home_automation
         
         .heater_mode_active_o(TEMPCONTROLLER_ac_heat_w),
         .cooler_mode_active_o(TEMPCONTROLLER_ac_cool_w)
+    );
+    
+    // Economy Controller
+    ace_conomy_mode ACE_ECO_CONTROLLER
+    (  
+        .eco_mode_valid_i(ECO_mod_valid_r),
+        .WINDOW_STATUS_i(WINDOW_STATUS_i),
+        .DOOR_STATUS_i(DOOR_STATUS_i),
+        .close_ac_o(NOWASTE_ac_energy_w)
+    );
+    
+    // SECURTY CONTOLLER
+    security_controller SECURTY_CONTOLLER
+    (
+        .security_control_valid_i(security_control_valid_r),
+        .person_count_i(person_count_r),
+        .lock_doors_o(lock_doors_o),
+        .lock_windows_o(lock_windows_o)
     );
     
 endmodule
