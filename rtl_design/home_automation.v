@@ -67,7 +67,7 @@ module home_automation
     );
     
     // Economy Controller
-    ace_conomy_mode ACE_ECO_CONTROLLER
+    ac_economy_mode AC_ECO_CONTROLLER
     (  
         .eco_mode_valid_i(ECO_mod_valid_r),
         .WINDOW_STATUS_i(WINDOW_STATUS_i),

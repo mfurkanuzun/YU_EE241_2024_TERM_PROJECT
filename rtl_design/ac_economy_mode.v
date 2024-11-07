@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 `include "design_constant.vh"
 
-module ace_conomy_mode
+module ac_economy_mode
   (  
 input eco_mode_valid_i,
 input [`HOME_WINDOW_COUNT-1:0] WINDOW_STATUS_i,
