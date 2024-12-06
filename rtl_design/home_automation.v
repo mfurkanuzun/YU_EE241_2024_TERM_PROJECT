@@ -55,6 +55,25 @@ module home_automation
     */
     assign AC_heat_o = ~NOWASTE_ac_energy_w & TEMPCONTROLLER_ac_heat_w;
     assign AC_cool_o = ~NOWASTE_ac_energy_w & TEMPCONTROLLER_ac_cool_w;
+
+    /*
+    // bh form
+    always @(*) begin
+        // AC_heat_o çıkışı, enerji israfı yoksa ve ısıtıcı modu aktifse 1 olur
+        if (~NOWASTE_ac_energy_w & TEMPCONTROLLER_ac_heat_w) begin
+            AC_heat_o = 1'b1;
+        end else begin
+            AC_heat_o = 1'b0;
+        end
+        
+        // AC_cool_o çıkışı, enerji israfı yoksa ve soğutma modu aktifse 1 olur
+        if (~NOWASTE_ac_energy_w & TEMPCONTROLLER_ac_cool_w) begin
+            AC_cool_o = 1'b1;
+        end else begin
+            AC_cool_o = 1'b0;
+        end
+    end
+    */
     
     // AC temp Controller
     ac_temp_controller AC_TEMP_CONTROLLER
