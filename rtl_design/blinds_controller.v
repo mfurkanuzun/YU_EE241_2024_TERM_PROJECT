@@ -23,3 +23,20 @@ module blinds_controller
     end
 
 endmodule
+
+module blinds_controller_df
+    (
+        input blinds_controller_valid_i,
+
+        input [11:0] time_i,        // [{6 bit} : {6 bit}] HH:MM
+        input [7:0] sunlight_level_i,
+
+        output blinds_status_o
+    );
+
+    wire time_condition = (6'd8 < time_i[11:6]) & (time_i[11:6] < 6'd17);  // Time check between 08:00 and 17:00
+    wire sunlight_condition = sunlight_level_i > 8'd128;  // Sunlight check (sufficient sunlight)
+
+    assign blinds_status_o = blinds_controller_valid_i & (time_condition | sunlight_condition);
+
+endmodule

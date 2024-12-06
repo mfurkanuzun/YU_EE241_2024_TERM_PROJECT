@@ -35,3 +35,33 @@ output close_ac_o
   
   
 endmodule
+
+module ac_economy_mode_bhv
+#(
+  parameter HOME_WINDOW_COUNT = 8,  // Varsayılan parametre
+  parameter HOME_DOOR_COUNT = 4    // Varsayılan parametre
+)
+(
+  input eco_mode_valid_i,
+  input [HOME_WINDOW_COUNT-1:0] WINDOW_STATUS_i,
+  input [HOME_DOOR_COUNT-1:0] DOOR_STATUS_i,
+  output reg close_ac_o
+);
+
+  // İç mantığın çalışması için her değişiklikte kontrol yap
+  always @(*) begin
+    // Eğer pencerelerden herhangi biri veya kapılardan herhangi biri açıksa
+    if ((|WINDOW_STATUS_i) || (|DOOR_STATUS_i)) begin
+      // ve ekonomi modu geçerliyse, AC'yi kapat
+      if (eco_mode_valid_i) 
+        close_ac_o = 1'b1;
+      else 
+        close_ac_o = 1'b0; // Ekonomi modu geçerli değilse kapama sinyali üretme
+    end else begin
+      // Pencereler ve kapılar kapalıysa kapama sinyali üretme
+      close_ac_o = 1'b0;
+    end
+  end
+
+endmodule
+
