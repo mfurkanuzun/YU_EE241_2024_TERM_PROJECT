@@ -1,26 +1,19 @@
-`timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 24.12.2024 17:35:54
-// Design Name: 
-// Module Name: ac_control_unit
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
 
 
-module ac_control_unit(
-
-    );
+module ac_control_unit(btn,status,clk);
+    input wire clk;
+    input wire btn;
+    
+    reg btn_prev;
+    
+    output reg status;
+    
+    always @(posedge clk) begin
+        if(btn && ~btn_prev)begin
+            status <= ~status;
+        end
+        
+        btn_prev <= btn;
+    end
+    
 endmodule
