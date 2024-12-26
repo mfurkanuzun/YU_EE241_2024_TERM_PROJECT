@@ -4,7 +4,7 @@ module moduleName #(parameter CLOCK_RATE = 100_000_000; parameter COUNTER_LIMIT_
         input clk,
         input threat,
 
-        output [1:0] security_level
+        output reg [1:0] security_level
     );
 
     localparam COUNTER_LIMIT = CLOCK_RATE * COUNTER_LIMIT_IN_SEC;
@@ -16,7 +16,7 @@ module moduleName #(parameter CLOCK_RATE = 100_000_000; parameter COUNTER_LIMIT_
 
     reg [3:0] status, status_next;
     reg [7:0] hazard_counter, hazard_counter_next;
-    reg [1:0] security_level, security_level_next;
+    reg [1:0] security_level_next;
 
     initial begin
         counter_enable = 1'b0;
