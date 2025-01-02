@@ -28,7 +28,7 @@ module panel_controller (clk, reset, uart_rx_done, uart_rx_data,
                 4'h0: ECO_mod_valid_r <= uart_rx_data[0];
                 4'h7: security_control_valid_r <= uart_rx_data[0];
                 4'ha: ac_working_mode_r <= uart_rx_data[3:0];
-                4'hc: person_count_r <= (person_count_r + $signed(uart_rx_data[3:0]));
+                4'hc: person_count_r <= (person_count_r + {{(`PERSON_COUNTER_DATA_WIDTH-4){uart_rx_data[3]}}, uart_rx_data[3:0]});
             endcase
         end
     end
