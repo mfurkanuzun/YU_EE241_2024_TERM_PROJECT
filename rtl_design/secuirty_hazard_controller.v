@@ -1,6 +1,6 @@
 
 
-module moduleName #(parameter CLOCK_RATE = 100_000_000; parameter COUNTER_LIMIT_IN_SEC = 10;) (
+module secuirty_hazard_controller #(parameter CLOCK_RATE = 100_000_000, parameter COUNTER_LIMIT_IN_SEC = 10) (
         input clk,
         input threat,
 
