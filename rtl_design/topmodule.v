@@ -16,6 +16,8 @@ module home_automation
         input AC_push_button,
         
         // Sensor Verileri
+        input threat,
+        
         input[`TEMPERATURE_SENSOR_DATA_WIDTH-1:0] temparature_i,
         input [`HOME_WINDOW_COUNT-1:0] WINDOW_STATUS_i,
         input [`HOME_DOOR_COUNT-1:0] DOOR_STATUS_i,
@@ -103,10 +105,12 @@ module home_automation
     SECURTY_CONTROL
     (
         clk,
-        uart_send,
+        threat,
 
         security_level_uart_data
     );
+    
+    assign uart_send = (|security_level_uart_data);
     
     emergency_control EMERGENCY
     (
@@ -174,6 +178,7 @@ endmodule
     end
     */
     
+
 
 
 
